@@ -92,10 +92,11 @@ impl JsonFrameWriter {
     {
         let dl_desc = self.dl_descriptor.take().unwrap();
 
-        assert_eq!(data.len(), dl_desc.size() + 4);
+        // TODO: Use Payload::from_data
+        assert_eq!(data.len(), dl_desc.size() + 20);
 
         // there's a 4 byte epoch header that we skip
-        let dl_data = data[4..dl_desc.size() + 4].to_vec();
+        let dl_data = data[20..dl_desc.size() + 20].to_vec();
 
         let dl = BuiltDisplayList::from_data(dl_data, dl_desc);
 
